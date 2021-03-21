@@ -2,15 +2,28 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
+	"net/http"
 )
 
 func main() {
-	r := gin.Default()
+	log.Println("Initializing ApiServer...")
+	router := gin.Default()
+	router.LoadHTMLGlob("kappa/dist/*.html")
+	router.Static("/js", "kappa/dist/js")
+	router.Static("/css", "kappa/dist/css")
+	router.Static("/img", "kappa/dist/img")
 
-	r.GET("/ping", func (c *gin.Context)  {
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"title": "Hello Kappa",
+		})
+	})
+
+	router.GET("/ping", func (c *gin.Context)  {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.Run(":7777")
+	router.Run(":7777")
 }
