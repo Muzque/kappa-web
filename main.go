@@ -20,6 +20,12 @@ func main() {
 		})
 	})
 
+	router.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"title": "Hello Kappa",
+		})
+	})
+
 	router.GET("/ping", func (c *gin.Context)  {
 		c.JSON(200, gin.H{
 			"message": "pong",
