@@ -2,22 +2,18 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 
 	"kappa-web/handler"
+	"kappa-web/config"
 )
-
-func NotFound(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title": "Homepage",
-	})
-}
 
 func main() {
 	log.Println("Initializing ApiServer...")
+	load()
+
 	router := gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./frontend/dist", false)))
 	router.GET("/ping", handler.Ping)
@@ -26,5 +22,10 @@ func main() {
 	{
 		api.GET("/ping", handler.Ping)
 	}
-	router.Run(":7777")
+	router.Run(":" + config.Val.Port)
+}
+
+
+func load() {
+	config.Init()
 }
