@@ -20,9 +20,15 @@ clean:
 .PHONY: sync
 ## sync: sync go vendor modules
 sync:
-	@echo "Sync go modules"
+	@echo "Syncing go modules..."
 	@go mod tidy \
 		&& go mod vendor
+
+.PHONY: test
+## test: test kappa-web functions
+test:
+	@echo "Testing..."
+	go test -v -cover=true .
 
 .PHONY: help
 ## help: print the help message

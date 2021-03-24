@@ -10,10 +10,7 @@ import (
 	"kappa-web/config"
 )
 
-func main() {
-	log.Println("Initializing ApiServer...")
-	load()
-
+func setupRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./frontend/dist", false)))
 	router.GET("/ping", handler.Ping)
@@ -22,6 +19,14 @@ func main() {
 	{
 		api.GET("/ping", handler.Ping)
 	}
+	return router
+}
+
+
+func main() {
+	log.Println("Initializing ApiServer...")
+	load()
+	router := setupRouter()
 	router.Run(":" + config.Val.Port)
 }
 
