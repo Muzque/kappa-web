@@ -4,18 +4,25 @@ APP=kappa-web
 ## build: build kappa-web application
 build:
 	@echo "Building..."
-	go build -o ${APP} main.go
+	go build -mod vendor -o ${APP} main.go
 
 .PHONY: run
 ## run: run main.go
 run:
-	go run -race main.go
+	go run -mod vendor -race main.go
 
 .PHONY: clean
 ## clean: clean up the binary
 clean:
 	@echo "Cleaning..."
 	go clean
+
+.PHONY: sync
+## sync: sync go vendor modules
+sync:
+	@echo "Sync go modules"
+	@go mod tidy \
+		&& go mod vendor
 
 .PHONY: help
 ## help: print the help message
