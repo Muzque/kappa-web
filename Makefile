@@ -34,7 +34,13 @@ sync:
 ## test: test kappa-web functions
 test:
 	@echo "Testing..."
-	@go test -v -cover=true .
+	@go test -v -race -cover=true .
+
+.PHONY: test-coverage
+## Run tests with coverage
+test-coverage:
+	@go test -v -race -coverprofile cover.out -covermode=atomic .
+	@cat cover.out >> coverage.txt
 
 .PHONY: help
 ## help: print the help message
