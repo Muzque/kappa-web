@@ -1,21 +1,26 @@
 APP=kappa-web
 
+.PHONY: lint
+lint: 
+## Lint Golang files
+	@golint -set_exit_status ${PKG_LIST}
+
 .PHONY: build
 ## build: build kappa-web application
 build:
 	@echo "Building..."
-	go build -mod vendor -o ${APP} main.go
+	@go build -mod vendor -o ${APP} main.go
 
 .PHONY: run
 ## run: run main.go
 run:
-	go run -mod vendor -race main.go
+	@go run -mod vendor -race main.go
 
 .PHONY: clean
 ## clean: clean up the binary
 clean:
 	@echo "Cleaning..."
-	go clean
+	@go clean
 
 .PHONY: sync
 ## sync: sync go vendor modules
@@ -28,7 +33,7 @@ sync:
 ## test: test kappa-web functions
 test:
 	@echo "Testing..."
-	go test -v -cover=true .
+	@go test -v -cover=true .
 
 .PHONY: help
 ## help: print the help message
