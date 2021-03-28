@@ -1,8 +1,9 @@
 APP=kappa-web
+PKG_LIST := $(shell go list ${APP}/... | grep -v /vendor/)
 
 .PHONY: lint
-lint: 
 ## Lint Golang files
+lint:
 	@golint -set_exit_status ${PKG_LIST}
 
 .PHONY: build
