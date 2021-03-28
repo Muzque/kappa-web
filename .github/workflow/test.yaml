@@ -1,0 +1,12 @@
+on: [push, pull_request]
+name: Test
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    container: golang:1.16
+    steps:
+    - name: Test
+      run: make test
