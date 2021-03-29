@@ -3,7 +3,7 @@ The Kappa Web is a RESTful http/websocket service to provide streaming videos.
 
 ## Table of Contents
 - [Setup](#setup)
-    - [On Mac OS X](#on-mac-os-x)
+    - [On Mac OS](#on-macos)
 - [Build and Install](#build-and-install)
 - [Run Unit Tests](#run-unit-tests)
 
