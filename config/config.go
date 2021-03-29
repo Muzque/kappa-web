@@ -10,6 +10,8 @@ var Val Config
 
 type Config struct {
 	Port string `mapstructure:"PORT"`
+	LogFilePath string `mapstructure:"LOG_FILE_PATH"`
+	LogFileName string `mapstructure:"LOG_FILE_NAME"`
 }
 
 func Init() {
