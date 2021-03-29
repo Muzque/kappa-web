@@ -6,12 +6,14 @@ import (
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 
-	"kappa-web/handler"
 	"kappa-web/config"
+	"kappa-web/handler"
+	"kappa-web/pkg/middleware"
 )
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
+	router.Use(middleware.LoggerToFile())
 	router.Use(static.Serve("/", static.LocalFile("./frontend/dist", false)))
 	router.GET("/ping", handler.Ping)
 
