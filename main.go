@@ -19,7 +19,7 @@ func setupRouter() *gin.Engine {
 
 	api := router.Group("/api")
 	{
-		api.GET("/ping", handler.Ping)
+		api.GET("/ping", middleware.Auth(), handler.Ping)
 	}
 	return router
 }
