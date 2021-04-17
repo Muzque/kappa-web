@@ -17,6 +17,11 @@ func setupRouter() *gin.Engine {
 	router.Use(static.Serve("/", static.LocalFile("./frontend/dist", false)))
 	router.GET("/ping", handler.Ping)
 
+	users := router.Group("/users")
+	{
+		users.POST("/login", handler.Login)
+	}
+
 	api := router.Group("/api")
 	{
 		api.GET("/ping", middleware.Auth(), handler.Ping)
@@ -26,7 +31,7 @@ func setupRouter() *gin.Engine {
 
 
 func main() {
-	log.Println("Initializing ApiServer...")
+	log.Println("Initializing API Server...")
 	load()
 	router := setupRouter()
 	err := router.Run(":" + config.Val.Port)

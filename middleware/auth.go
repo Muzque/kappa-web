@@ -4,26 +4,26 @@ import (
 	"github.com/gin-gonic/gin"
 	"kappa-web/pkg/jwt"
 	"kappa-web/pkg/res"
-	"net/http"
 )
+
+func unauthorized(c *gin.Context)  {
+	res.BadRequest(c, 403, gin.H{
+		"message": "Unauthenticated credentials.",
+	})
+	c.Abort()
+}
 
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token, err := c.Cookie(jwt.Key)
 		if err != nil {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"error_code": res.ErrUnauthorizedCode,
-			})
-			c.Abort()
+			unauthorized(c)
 			return
 		}
 
 		account, err := jwt.VerifyToken(token)
 		if err != nil || account == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"error_code": res.ErrUnauthorizedCode,
-			})
-			c.Abort()
+			unauthorized(c)
 			return
 		}
 		c.Set("account", account)
