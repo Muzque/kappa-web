@@ -1,3 +1,8 @@
+# General
 PORT: 7777
 LOG_FILE_NAME: kappa.log
 LOG_FILE_PATH: /tmp/
+
+# Auth
+JWT_TOKEN_TTL: 36000
+JWT_SECRET: "abcdefg"

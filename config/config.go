@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-
 	"github.com/spf13/viper"
 )
 
@@ -12,6 +11,9 @@ type Config struct {
 	Port string `mapstructure:"PORT"`
 	LogFilePath string `mapstructure:"LOG_FILE_PATH"`
 	LogFileName string `mapstructure:"LOG_FILE_NAME"`
+
+	JWTTokenTtl int `mapstructure:"JWT_TOKEN_TTL"`
+	JWTSecret   string `mapstructure:"JWT_SECRET"`
 }
 
 func Init() {

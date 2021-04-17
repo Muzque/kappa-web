@@ -4,7 +4,6 @@
 *.dll
 *.so
 *.dylib
-kappa-web
 
 # Test binary, built with `go test -c`
 *.test
@@ -17,3 +16,8 @@ kappa-web
 
 ## IDE files
 .vscode
+.idea
+
+## Output of build files
+kappa-web
+

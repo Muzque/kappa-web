@@ -8,7 +8,7 @@ import (
 
 	"kappa-web/config"
 	"kappa-web/handler"
-	"kappa-web/pkg/middleware"
+	"kappa-web/middleware"
 )
 
 func setupRouter() *gin.Engine {
@@ -17,19 +17,27 @@ func setupRouter() *gin.Engine {
 	router.Use(static.Serve("/", static.LocalFile("./frontend/dist", false)))
 	router.GET("/ping", handler.Ping)
 
+	users := router.Group("/users")
+	{
+		users.POST("/login", handler.Login)
+	}
+
 	api := router.Group("/api")
 	{
-		api.GET("/ping", handler.Ping)
+		api.GET("/ping", middleware.Auth(), handler.Ping)
 	}
 	return router
 }
 
 
 func main() {
-	log.Println("Initializing ApiServer...")
+	log.Println("Initializing API Server...")
 	load()
 	router := setupRouter()
-	router.Run(":" + config.Val.Port)
+	err := router.Run(":" + config.Val.Port)
+	if err != nil {
+		return 
+	}
 }
 
 
