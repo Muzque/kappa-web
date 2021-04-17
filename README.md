@@ -1,5 +1,9 @@
 # Kappa Web
-The Kappa Web is a RESTful http/websocket service to provide streaming videos.
+The Kappa Web is for calculating your crypto coins profits!
+Functions:
+- Accounting your every wallet.
+- Calculate the profit of every kind of coins.
+- Draw your incomes and drawback diagrams.
 
 ## Table of Contents
 - [Setup](#setup)
