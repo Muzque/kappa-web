@@ -1,19 +1,18 @@
 package middleware
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"path"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 
 	"kappa-web/config"
 )
 
 func LoggerToFile() gin.HandlerFunc {
-	fmt.Println("Heelo")
 	logFilePath := config.Val.LogFilePath
 	logFileName := config.Val.LogFileName
 	fileName := path.Join(logFilePath, logFileName)

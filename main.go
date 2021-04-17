@@ -8,7 +8,7 @@ import (
 
 	"kappa-web/config"
 	"kappa-web/handler"
-	"kappa-web/pkg/middleware"
+	"kappa-web/middleware"
 )
 
 func setupRouter() *gin.Engine {
@@ -29,7 +29,10 @@ func main() {
 	log.Println("Initializing ApiServer...")
 	load()
 	router := setupRouter()
-	router.Run(":" + config.Val.Port)
+	err := router.Run(":" + config.Val.Port)
+	if err != nil {
+		return 
+	}
 }
 
 
